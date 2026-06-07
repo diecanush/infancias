@@ -37,8 +37,8 @@
       <a href="#autora">Autora</a>
       <a href="#comprar">Comprar</a>
     </nav>
-    <a class="btn btn-outline whatsapp-mini" href="https://wa.me/5491165180477?text=Hola%20Patricia%2C%20quiero%20comprar%20el%20libro%20Infancias%20en%20formato%20papel.%20%C2%BFMe%20pas%C3%A1s%20precio%2C%20formas%20de%20pago%20y%20env%C3%ADo%3F" target="_blank" rel="noopener">
-      <span class="wa">☏</span> Comprar por WhatsApp
+    <a class="btn btn-outline whatsapp-mini" href="#comprar">
+      Consultar por el libro
     </a>
   </header>
 
@@ -50,7 +50,7 @@
         <span class="accent-line"></span>
         <p class="lead">Una propuesta para mirar las infancias desde la integración, el respeto por la singularidad y el acompañamiento temprano.</p>
         <div class="actions">
-          <a class="btn btn-primary" href="https://wa.me/5491165180477?text=Hola%20Patricia%2C%20quiero%20comprar%20el%20libro%20Infancias%20en%20formato%20papel.%20%C2%BFMe%20pas%C3%A1s%20precio%2C%20formas%20de%20pago%20y%20env%C3%ADo%3F" target="_blank" rel="noopener"><span class="wa">☏</span> Comprar por WhatsApp</a>
+          <a class="btn btn-primary" href="#comprar">Quiero recibir información</a>
           <a class="btn btn-secondary" href="#enfoque">Ver más</a>
         </div>
         <div class="features" aria-label="Características del libro">
@@ -158,13 +158,35 @@
       </blockquote>
     </section>
 
-    <section id="comprar" class="cta-box">
+    <section id="comprar" class="cta-box lead-form-section">
       <div class="cta-icon">📖</div>
-      <div>
+      <div class="lead-form-copy">
         <h2>Conseguí tu ejemplar en papel</h2>
-        <p>Disponible solo en formato papel.</p>
+        <p>Dejanos tus datos y te contactamos con la información para conseguirlo.</p>
       </div>
-      <a class="btn btn-primary" href="https://wa.me/5491165180477?text=Hola%20Patricia%2C%20quiero%20comprar%20el%20libro%20Infancias%20en%20formato%20papel.%20%C2%BFMe%20pas%C3%A1s%20precio%2C%20formas%20de%20pago%20y%20env%C3%ADo%3F" target="_blank" rel="noopener"><span class="wa">☏</span> Consultar por WhatsApp</a>
+      <form class="lead-form" id="lead-form">
+        <div class="form-row two-cols">
+          <label>
+            <span>Nombre y apellido</span>
+            <input type="text" name="nombre" autocomplete="name" required>
+          </label>
+          <label>
+            <span>Mail</span>
+            <input type="email" name="email" autocomplete="email" required>
+          </label>
+        </div>
+        <fieldset>
+          <legend>Me interesa porque soy:</legend>
+          <div class="interest-options">
+            <label><input type="radio" name="perfil" value="Profesional de la salud" required> Profesional de la salud</label>
+            <label><input type="radio" name="perfil" value="Docente"> Docente</label>
+            <label><input type="radio" name="perfil" value="Estudiante"> Estudiante</label>
+            <label><input type="radio" name="perfil" value="Padre/madre"> Padre/madre</label>
+          </div>
+        </fieldset>
+        <button class="btn btn-primary" type="submit">Enviar consulta</button>
+        <p class="form-status" aria-live="polite"></p>
+      </form>
     </section>
   </main>
 
@@ -181,6 +203,19 @@
     const menuButton = document.querySelector('.menu-button');
     const nav = document.querySelector('.main-nav');
     menuButton.addEventListener('click', () => nav.classList.toggle('open'));
+
+    const leadForm = document.querySelector('#lead-form');
+    leadForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const data = new FormData(leadForm);
+      const nombre = data.get('nombre');
+      const email = data.get('email');
+      const perfil = data.get('perfil');
+      const subject = encodeURIComponent('Consulta por el libro Infancias');
+      const body = encodeURIComponent(`Hola, quiero recibir información sobre el libro Infancias.\n\nNombre y apellido: ${nombre}\nMail: ${email}\nMe interesa porque soy: ${perfil}`);
+      window.location.href = `mailto:etiquetaediciones@gmail.com?subject=${subject}&body=${body}`;
+      leadForm.querySelector('.form-status').textContent = 'Se abrió tu correo para enviar la consulta.';
+    });
   </script>
 </body>
 </html>

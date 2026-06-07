@@ -178,10 +178,10 @@
         <fieldset>
           <legend>Me interesa porque soy:</legend>
           <div class="interest-options">
-            <label><input type="radio" name="perfil" value="Profesional de la salud" required> Profesional de la salud</label>
-            <label><input type="radio" name="perfil" value="Docente"> Docente</label>
-            <label><input type="radio" name="perfil" value="Estudiante"> Estudiante</label>
-            <label><input type="radio" name="perfil" value="Padre/madre"> Padre/madre</label>
+            <label class="interest-option"><input type="radio" name="perfil" value="Profesional de la salud" required><span>Profesional de la salud</span></label>
+            <label class="interest-option"><input type="radio" name="perfil" value="Docente"><span>Docente</span></label>
+            <label class="interest-option"><input type="radio" name="perfil" value="Estudiante"><span>Estudiante</span></label>
+            <label class="interest-option"><input type="radio" name="perfil" value="Padre/madre"><span>Padre/madre</span></label>
           </div>
         </fieldset>
         <button class="btn btn-primary" type="submit">Enviar consulta</button>
@@ -211,10 +211,9 @@
       const nombre = data.get('nombre');
       const email = data.get('email');
       const perfil = data.get('perfil');
-      const subject = encodeURIComponent('Consulta por el libro Infancias');
-      const body = encodeURIComponent(`Hola, quiero recibir información sobre el libro Infancias.\n\nNombre y apellido: ${nombre}\nMail: ${email}\nMe interesa porque soy: ${perfil}`);
-      window.location.href = `mailto:etiquetaediciones@gmail.com?subject=${subject}&body=${body}`;
-      leadForm.querySelector('.form-status').textContent = 'Se abrió tu correo para enviar la consulta.';
+      const message = encodeURIComponent(`Hola Patricia, quiero recibir información sobre el libro Infancias.\n\nNombre y apellido: ${nombre}\nMail: ${email}\nMe interesa porque soy: ${perfil}`);
+      window.open(`https://wa.me/5491165180477?text=${message}`, '_blank', 'noopener');
+      leadForm.querySelector('.form-status').textContent = 'Se abrió WhatsApp con tu consulta.';
     });
   </script>
 </body>

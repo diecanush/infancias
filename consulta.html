@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Consulta | Patricia V. Stevani</title>
+  <meta name="description" content="Formulario de consulta por el libro y propuestas profesionales de Patricia V. Stevani.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260620-1">
+</head>
+<body class="subpage">
+  <header class="site-header">
+    <a class="brand" href="index.html#inicio" aria-label="Infancias"><span>Infancias</span><small>Abordaje integral<br>activo temprano</small></a>
+    <button class="menu-button" type="button" aria-label="Abrir menú">☰</button>
+    <nav class="main-nav" aria-label="Navegación principal"><a href="index.html#libro">Libro</a><a href="index.html#autora">Autora</a><a href="propuestas.html">Propuestas</a><a href="trayectoria.html">Trayectoria</a><a class="active" href="consulta.html">Consultar</a></nav>
+    <a class="btn btn-outline whatsapp-mini" href="index.html#comprar">Libro</a>
+  </header>
+  <main>
+    <section class="subpage-hero section compact-hero"><p class="section-kicker">Contacto profesional</p><h1>Hagamos una consulta</h1><span class="accent-line"></span><p>Completá los datos y se abrirá WhatsApp con el mensaje listo para enviar.</p></section>
+    <section class="section consultation-layout"><form class="consultation-form" id="consultation-form">
+      <div class="form-row two-cols"><label><span>Nombre y apellido</span><input type="text" name="nombre" autocomplete="name" required></label><label><span>Email</span><input type="email" name="email" autocomplete="email" required></label></div>
+      <div class="form-row two-cols"><label><span>Teléfono o WhatsApp</span><input type="tel" name="telefono" autocomplete="tel" required></label><label><span>Institución u organización <em>Opcional</em></span><input type="text" name="institucion" autocomplete="organization"></label></div>
+      <label><span>Motivo de consulta</span><select name="motivo" required><option value="libro">Quiero consultar por el libro</option><option value="capacitacion">Quiero organizar una capacitación</option><option value="taller">Quiero consultar por un taller</option><option value="supervision">Quiero acompañamiento o supervisión profesional</option><option value="ponencia">Quiero convocarla para una ponencia o jornada</option><option value="otro">Otro</option></select></label>
+      <label><span>Mensaje</span><textarea name="mensaje" rows="5" required></textarea></label>
+      <button class="btn btn-primary" type="submit">Abrir consulta en WhatsApp</button><p class="form-status" aria-live="polite"></p>
+    </form></section>
+  </main>
+  <footer class="footer"><span class="editorial-mark">E</span><strong>Editorial Etiqueta</strong><span></span><a href="mailto:Patricia.stevani@gmail.com">Patricia.stevani@gmail.com</a><span></span><a href="https://www.instagram.com/lic.patricia_stevani" target="_blank" rel="noopener">@lic.patricia_stevani</a></footer>
+  <script>
+    const menuButton=document.querySelector('.menu-button');const nav=document.querySelector('.main-nav');menuButton.addEventListener('click',()=>nav.classList.toggle('open'));
+    const form=document.querySelector('#consultation-form');const motive=form.elements.motivo;const query=new URLSearchParams(location.search);if(query.get('motivo')) motive.value=query.get('motivo');
+    form.addEventListener('submit',(event)=>{event.preventDefault();const data=new FormData(form);const labels={libro:'Quiero consultar por el libro',capacitacion:'Quiero organizar una capacitación',taller:'Quiero consultar por un taller',supervision:'Quiero acompañamiento o supervisión profesional',ponencia:'Quiero convocarla para una ponencia o jornada',otro:'Otro'};const message=encodeURIComponent(`Hola Patricia, quiero realizar una consulta.\n\nMotivo: ${labels[data.get('motivo')]}\nNombre: ${data.get('nombre')}\nEmail: ${data.get('email')}\nWhatsApp: ${data.get('telefono')}\nInstitución: ${data.get('institucion') || '-'}\nMensaje: ${data.get('mensaje')}`);window.open(`https://wa.me/5491165180477?text=${message}`,'_blank','noopener');form.querySelector('.form-status').textContent='Se abrió WhatsApp con tu consulta.';});
+  </script>
+</body>
+</html>
